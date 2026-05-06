@@ -19,7 +19,6 @@ import java.util.Map;
  * A source connector with configurable fault-injection behavior for testing.
  */
 public class StrimziFaultInjectionSourceConnector extends SourceConnector {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(StrimziFaultInjectionSourceConnector.class);
 
     private boolean taskFailOnStart;

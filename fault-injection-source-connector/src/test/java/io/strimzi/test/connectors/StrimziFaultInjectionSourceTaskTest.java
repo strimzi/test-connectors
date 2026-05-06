@@ -19,7 +19,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StrimziFaultInjectionSourceTaskTest {
-
     private Map<String, String> defaultTaskConfig() {
         Map<String, String> config = new HashMap<>();
         config.put(StrimziFaultInjectionSourceConnectorConfig.TASK_FAIL_ON_START, "false");

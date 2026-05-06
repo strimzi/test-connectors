@@ -74,7 +74,7 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-slf4j-impl</artifactId>
+                <artifactId>log4j-slf4j2-impl</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
         </dependencies>
@@ -88,21 +88,21 @@
 
         <!-- DEPENDENCY CODE VERSIONS       -->
         <kafka.version>4.2.0</kafka.version>
-        <slf4j.version>1.7.36</slf4j.version>
+        <slf4j.version>2.0.17</slf4j.version>
 
         <!-- DEPENDENCY TEST VERSIONS      -->
-        <jupiter.version>5.11.4</jupiter.version>
+        <jupiter.version>6.0.0</jupiter.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <log4j.version>2.24.3</log4j.version>
+        <log4j.version>2.25.4</log4j.version>
 
         <!-- PLUGIN VERSIONS       -->
-        <maven.compiler-plugin.version>3.11.0</maven.compiler-plugin.version>
-        <maven.javadoc-plugin.version>3.5.0</maven.javadoc-plugin.version>
-        <maven.source-plugin.version>3.2.1</maven.source-plugin.version>
+        <maven.compiler-plugin.version>3.10.1</maven.compiler-plugin.version>
+        <maven.javadoc-plugin.version>3.10.0</maven.javadoc-plugin.version>
+        <maven.source-plugin.version>3.0.1</maven.source-plugin.version>
         <maven.checkstyle.version>3.5.0</maven.checkstyle.version>
         <maven.gpg.version>1.6</maven.gpg.version>
-        <maven-jar-plugin.version>3.4.0</maven-jar-plugin.version>
-        <maven-surefire-failsafe-plugin.version>3.1.2</maven-surefire-failsafe-plugin.version>
+        <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
+        <maven-surefire-failsafe-plugin.version>3.5.4</maven-surefire-failsafe-plugin.version>
         <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
     </properties>
 
@@ -152,7 +152,6 @@
                             <configuration>
                                 <show>public</show>
                                 <failOnError>true</failOnError>
-                                <failOnWarnings>false</failOnWarnings>
                             </configuration>
                         </execution>
                     </executions>
@@ -178,7 +177,7 @@
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>8.29</version>
+                            <version>10.18.1</version>
                         </dependency>
                     </dependencies>
                     <executions>

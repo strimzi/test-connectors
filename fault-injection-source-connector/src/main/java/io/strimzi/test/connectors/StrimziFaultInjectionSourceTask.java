@@ -22,7 +22,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * Source task for the {@link StrimziFaultInjectionSourceConnector}.
  */
 public class StrimziFaultInjectionSourceTask extends SourceTask {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(StrimziFaultInjectionSourceTask.class);
     private static final Schema VALUE_SCHEMA = SchemaBuilder.int64().build();
 

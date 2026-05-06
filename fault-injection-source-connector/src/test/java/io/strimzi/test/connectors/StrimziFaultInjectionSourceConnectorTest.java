@@ -19,7 +19,6 @@ import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StrimziFaultInjectionSourceConnectorTest {
-
     private Map<String, String> defaultConfig() {
         Map<String, String> config = new HashMap<>();
         config.put(StrimziFaultInjectionSourceConnectorConfig.START_TIME_MS, "0");
