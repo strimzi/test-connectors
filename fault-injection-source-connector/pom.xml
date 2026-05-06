@@ -11,10 +11,10 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>strimzi-fault-injection-source-connector</artifactId>
+    <artifactId>fault-injection-source-connector</artifactId>
     <packaging>jar</packaging>
 
-    <name>Strimzi Fault Injection Source Connector</name>
+    <name>Fault Injection Source Connector</name>
     <description>A Kafka Connect source connector with configurable fault-injection behavior for testing purposes.</description>
 
     <dependencies>

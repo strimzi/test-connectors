@@ -8,9 +8,9 @@
 
 # Strimzi Test Connectors
 
-Kafka Connect connectors with configurable fault-injection behavior for testing in the [Strimzi](https://strimzi.io) project.
-Testing Kafka Connect integration in Strimzi requires connectors whose behavior can be controlled (i.e, injecting delays, failures, and specific record rates without depending on external systems).
-These connectors provide that, allowing tests to verify how the operator and Connect runtime handle various fault scenarios.
+Kafka Connect connectors for testing in the [Strimzi](https://strimzi.io) project.
+Testing Kafka Connect integration in Strimzi requires connectors whose behavior can be controlled without depending on external systems.
+These connectors provide that, allowing tests to verify how the operator and Connect runtime handle various scenarios.
 
 The connector JARs are pre-installed in the [strimzi/test-container-images](https://github.com/strimzi/test-container-images) 
 and used via [strimzi-test-container](https://github.com/strimzi/test-container).
