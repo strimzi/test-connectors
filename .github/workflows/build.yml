@@ -1,0 +1,65 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "main"
+      - "release-*"
+  pull_request:
+    branches:
+      - "*"
+
+# Declare default permissions as read only
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test-connectors:
+    name: Build & Test Test-Connectors
+    strategy:
+      matrix:
+        java:
+          - version: "11"
+            mainBuild: false
+          - version: "17"
+            mainBuild: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Java and Maven
+        uses: strimzi/github-actions/.github/actions/dependencies/setup-java@v1
+        with:
+          javaVersion: ${{ matrix.java.version }}
+
+      - name: Build binaries using build-binaries action
+        uses: strimzi/github-actions/.github/actions/build/build-binaries@v1
+        with:
+          mainJavaBuild: ${{ matrix.java.mainBuild }}
+          artifactSuffix: "strimzi-test-connectors"
+          clusterOperatorBuild: "false"
+
+  deploy-java:
+    name: Deploy Java artifacts to Maven Central
+    needs:
+      - build-test-connectors
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: strimzi/github-actions/.github/actions/dependencies/setup-java@v1
+        with:
+          javaVersion: "17"
+
+      - uses: strimzi/github-actions/.github/actions/build/deploy-java@v1
+        with:
+          gpgPassphrase: ${{ secrets.GPG_PASSPHRASE }}
+          gpgSigningKey: ${{ secrets.GPG_SIGNING_KEY }}
+          centralUsername: ${{ secrets.CENTRAL_USERNAME }}
+          centralPassword: ${{ secrets.CENTRAL_PASSWORD }}
+          modules: "./"
