@@ -1,0 +1,14 @@
+# Configuration for GitHub actions linting - docker://rhysd/actionlint:1.7.10
+# For more info see https://github.com/rhysd/actionlint/blob/main/docs/config.md
+
+# Configuration related to self-hosted runner.
+self-hosted-runner:
+  # Labels of self-hosted runner in array of strings.
+  # Add other runners if needed
+  labels:
+    - cncf-ubuntu-2-8-x86
+    - cncf-ubuntu-4-16-x86
+    - cncf-ubuntu-8-32-x86
+    - cncf-ubuntu-2-8-arm
+    - cncf-ubuntu-4-16-arm
+    - cncf-ubuntu-8-32-arm

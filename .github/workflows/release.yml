@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        description: 'Release Version (e.g., 0.1.0 for GA or 0.1.0-RC1 for RC)'
+        required: true
+        type: string
+
+# Declare default permissions as read only
+permissions:
+  contents: read
+
+jobs:
+  release-artifacts:
+    name: Release Test-Connectors artifacts to Maven Central
+    if: ${{ startsWith(github.ref, 'refs/heads/release-') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: strimzi/github-actions/.github/actions/dependencies/setup-java@v1
+        with:
+          javaVersion: "17"
+
+      - uses: strimzi/github-actions/.github/actions/build/release-artifacts@v1
+        with:
+          releaseVersion: ${{ inputs.releaseVersion }}
+          artifactSuffix: "strimzi-test-connectors"
+
+      - uses: strimzi/github-actions/.github/actions/build/deploy-java@v1
+        with:
+          gpgPassphrase: ${{ secrets.GPG_PASSPHRASE }}
+          gpgSigningKey: ${{ secrets.GPG_SIGNING_KEY }}
+          centralUsername: ${{ secrets.CENTRAL_USERNAME }}
+          centralPassword: ${{ secrets.CENTRAL_PASSWORD }}
+          modules: "./"
