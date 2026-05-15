@@ -15,9 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.strimzi.test.connectors.FaultInjectionUtils.maybeInjectDelay;
-import static io.strimzi.test.connectors.FaultInjectionUtils.maybeInjectFailure;
-
 /**
  * A source connector with configurable fault-injection behavior for testing.
  */
@@ -46,8 +43,8 @@ public class StrimziFaultInjectionSourceConnector extends SourceConnector {
         taskPollRecords = config.getLong(StrimziFaultInjectionSourceConnectorConfig.TASK_POLL_RECORDS);
         topicName = config.getString(StrimziFaultInjectionSourceConnectorConfig.TOPIC_NAME);
         numPartitions = config.getInt(StrimziFaultInjectionSourceConnectorConfig.NUM_PARTITIONS);
-        maybeInjectDelay(startTime);
-        maybeInjectFailure(config.getBoolean(StrimziFaultInjectionSourceConnectorConfig.FAIL_ON_START),
+        FaultInjectionUtils.maybeInjectDelay(startTime);
+        FaultInjectionUtils.maybeInjectFailure(config.getBoolean(StrimziFaultInjectionSourceConnectorConfig.FAIL_ON_START),
                 new RuntimeException("Failed to start connector"));
         LOGGER.info("Started connector {}", this);
     }
@@ -77,7 +74,7 @@ public class StrimziFaultInjectionSourceConnector extends SourceConnector {
     @Override
     public void stop() {
         LOGGER.info("Stopping connector {}", this);
-        maybeInjectDelay(stopTime);
+        FaultInjectionUtils.maybeInjectDelay(stopTime);
         LOGGER.info("Stopped connector {}", this);
     }
 
