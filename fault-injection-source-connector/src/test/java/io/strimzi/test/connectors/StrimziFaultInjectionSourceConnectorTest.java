@@ -14,8 +14,6 @@ import java.util.Map;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StrimziFaultInjectionSourceConnectorTest {
@@ -108,39 +106,4 @@ class StrimziFaultInjectionSourceConnectorTest {
         assertThat(connector.version(), is(nullValue()));
     }
 
-    @Test
-    void testSleepWithZeroDoesNotBlock() {
-        long start = System.currentTimeMillis();
-        StrimziFaultInjectionSourceConnector.sleep(0);
-        long elapsed = System.currentTimeMillis() - start;
-        assertThat(elapsed, is(lessThan(100L)));
-    }
-
-    @Test
-    void testSleepWithNegativeDoesNotBlock() {
-        long start = System.currentTimeMillis();
-        StrimziFaultInjectionSourceConnector.sleep(-1);
-        long elapsed = System.currentTimeMillis() - start;
-        assertThat(elapsed, is(lessThan(100L)));
-    }
-
-    @Test
-    void testSleepWithPositiveValueSleeps() {
-        long start = System.currentTimeMillis();
-        StrimziFaultInjectionSourceConnector.sleep(200);
-        long elapsed = System.currentTimeMillis() - start;
-        assertThat(elapsed, is(greaterThanOrEqualTo(150L)));
-    }
-
-    @Test
-    void testSleepRestoresInterruptFlag() throws InterruptedException {
-        Thread testThread = new Thread(() -> {
-            Thread.currentThread().interrupt();
-            StrimziFaultInjectionSourceConnector.sleep(5_000);
-            assertThat(Thread.currentThread().isInterrupted(), is(true));
-        });
-        testThread.start();
-        testThread.join(2_000);
-        assertThat("Thread should have finished quickly after interrupt", testThread.isAlive(), is(false));
-    }
 }

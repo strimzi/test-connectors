@@ -47,20 +47,16 @@ public class StrimziFaultInjectionSourceTask extends SourceTask {
         taskPollRecords = config.getLong(StrimziFaultInjectionSourceConnectorConfig.TASK_POLL_RECORDS);
         topicName = config.getString(StrimziFaultInjectionSourceConnectorConfig.TOPIC_NAME);
         numPartitions = config.getInt(StrimziFaultInjectionSourceConnectorConfig.NUM_PARTITIONS);
-        LOGGER.info("Sleeping for {}ms", taskStartTime);
-        StrimziFaultInjectionSourceConnector.sleep(taskStartTime);
-        if (config.getBoolean(StrimziFaultInjectionSourceConnectorConfig.TASK_FAIL_ON_START)) {
-            LOGGER.info("Failing task {}", this);
-            throw new ConnectException("Task failed to start");
-        }
+        FaultInjectionUtils.maybeInjectDelay(taskStartTime);
+        FaultInjectionUtils.maybeInjectFailure(config.getBoolean(StrimziFaultInjectionSourceConnectorConfig.TASK_FAIL_ON_START),
+                new ConnectException("Task failed to start"));
         LOGGER.info("Started task {}", this);
     }
 
     @Override
     public List<SourceRecord> poll() {
         LOGGER.debug("Poll {}", this);
-        LOGGER.debug("Sleeping for {}ms in poll", taskPollTime);
-        StrimziFaultInjectionSourceConnector.sleep(taskPollTime);
+        FaultInjectionUtils.maybeInjectDelay(taskPollTime);
         List<SourceRecord> records = new ArrayList<>();
         for (int i = 0; i < taskPollRecords; i++) {
             long currentRecord = record.getAndIncrement();
@@ -77,6 +73,6 @@ public class StrimziFaultInjectionSourceTask extends SourceTask {
     @Override
     public void stop() {
         LOGGER.info("Stopping task {}", this);
-        StrimziFaultInjectionSourceConnector.sleep(taskStopTime);
+        FaultInjectionUtils.maybeInjectDelay(taskStopTime);
     }
 }
