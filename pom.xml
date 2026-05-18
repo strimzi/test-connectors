@@ -84,7 +84,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!--  JAVA CODE VERSION   -->
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
 
         <!-- DEPENDENCY CODE VERSIONS       -->
         <kafka.version>4.2.0</kafka.version>
@@ -114,7 +114,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven.compiler-plugin.version}</version>
                     <configuration>
-                        <release>11</release>
+                        <release>17</release>
                         <compilerArgs>
                             <arg>-Xlint:unchecked,deprecation</arg>
                             <arg>-Werror</arg>
