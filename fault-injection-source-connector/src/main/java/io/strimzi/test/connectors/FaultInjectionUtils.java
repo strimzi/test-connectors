@@ -32,14 +32,11 @@ final class FaultInjectionUtils {
     }
 
     /**
-     * Injects a failure if the flag is set.
+     * Injects a failure by throwing the given exception.
      *
-     * @param shouldFail whether to throw
-     * @param exception  the exception to throw
+     * @param exception the exception to throw
      */
-    static void maybeInjectFailure(boolean shouldFail, RuntimeException exception) {
-        if (shouldFail) {
-            throw exception;
-        }
+    static void injectFailure(RuntimeException exception) {
+        throw exception;
     }
 }

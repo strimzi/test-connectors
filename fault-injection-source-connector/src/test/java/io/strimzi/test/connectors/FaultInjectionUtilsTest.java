@@ -10,7 +10,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FaultInjectionUtilsTest {
@@ -51,12 +50,7 @@ class FaultInjectionUtilsTest {
     }
 
     @Test
-    void testMaybeInjectFailureWhenTrue() {
-        assertThrows(RuntimeException.class, () -> FaultInjectionUtils.maybeInjectFailure(true, new RuntimeException("test")));
-    }
-
-    @Test
-    void testMaybeInjectFailureWhenFalse() {
-        assertDoesNotThrow(() -> FaultInjectionUtils.maybeInjectFailure(false, new RuntimeException("test")));
+    void testInjectFailureThrows() {
+        assertThrows(RuntimeException.class, () -> FaultInjectionUtils.injectFailure(new RuntimeException("test")));
     }
 }

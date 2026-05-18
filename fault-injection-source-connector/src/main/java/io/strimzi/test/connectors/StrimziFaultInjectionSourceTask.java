@@ -48,8 +48,9 @@ public class StrimziFaultInjectionSourceTask extends SourceTask {
         topicName = config.getString(StrimziFaultInjectionSourceConnectorConfig.TOPIC_NAME);
         numPartitions = config.getInt(StrimziFaultInjectionSourceConnectorConfig.NUM_PARTITIONS);
         FaultInjectionUtils.maybeInjectDelay(taskStartTime);
-        FaultInjectionUtils.maybeInjectFailure(config.getBoolean(StrimziFaultInjectionSourceConnectorConfig.TASK_FAIL_ON_START),
-                new ConnectException("Task failed to start"));
+        if (config.getBoolean(StrimziFaultInjectionSourceConnectorConfig.TASK_FAIL_ON_START)) {
+            FaultInjectionUtils.injectFailure(new ConnectException("Task failed to start"));
+        }
         LOGGER.info("Started task {}", this);
     }
 

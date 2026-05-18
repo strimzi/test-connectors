@@ -44,8 +44,9 @@ public class StrimziFaultInjectionSourceConnector extends SourceConnector {
         topicName = config.getString(StrimziFaultInjectionSourceConnectorConfig.TOPIC_NAME);
         numPartitions = config.getInt(StrimziFaultInjectionSourceConnectorConfig.NUM_PARTITIONS);
         FaultInjectionUtils.maybeInjectDelay(startTime);
-        FaultInjectionUtils.maybeInjectFailure(config.getBoolean(StrimziFaultInjectionSourceConnectorConfig.FAIL_ON_START),
-                new RuntimeException("Failed to start connector"));
+        if (config.getBoolean(StrimziFaultInjectionSourceConnectorConfig.FAIL_ON_START)) {
+            FaultInjectionUtils.injectFailure(new RuntimeException("Failed to start connector"));
+        }
         LOGGER.info("Started connector {}", this);
     }
 
