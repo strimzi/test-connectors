@@ -23,8 +23,6 @@ jobs:
     strategy:
       matrix:
         java:
-          - version: "11"
-            mainBuild: false
           - version: "17"
             mainBuild: true
     runs-on: ubuntu-latest
