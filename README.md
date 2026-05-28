@@ -22,7 +22,7 @@ and used via [strimzi-test-container](https://github.com/strimzi/test-container)
 ### Adding a new connector
 
 1. Create a new Maven module and add it to `<modules>` in the root `pom.xml`.
-2. Add the module name to `MODULES` in the `Makefile` so it is included in release archives.
+2. Add the module as a `<dependency>` in `distribution/pom.xml` and as a `<dependencySet>` in `distribution/src/main/assembly/distribution.xml` so it is included in release archives.
 
 ## License
 
