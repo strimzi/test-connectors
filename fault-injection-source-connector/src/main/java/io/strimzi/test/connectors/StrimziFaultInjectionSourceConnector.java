@@ -43,10 +43,9 @@ public class StrimziFaultInjectionSourceConnector extends SourceConnector {
         taskPollRecords = config.getLong(StrimziFaultInjectionSourceConnectorConfig.TASK_POLL_RECORDS);
         topicName = config.getString(StrimziFaultInjectionSourceConnectorConfig.TOPIC_NAME);
         numPartitions = config.getInt(StrimziFaultInjectionSourceConnectorConfig.NUM_PARTITIONS);
-        sleep(startTime);
+        FaultInjectionUtils.maybeInjectDelay(startTime);
         if (config.getBoolean(StrimziFaultInjectionSourceConnectorConfig.FAIL_ON_START)) {
-            LOGGER.info("Failing connector {}", this);
-            throw new RuntimeException("Failed to start connector");
+            FaultInjectionUtils.injectFailure(new RuntimeException("Failed to start connector"));
         }
         LOGGER.info("Started connector {}", this);
     }
@@ -76,7 +75,7 @@ public class StrimziFaultInjectionSourceConnector extends SourceConnector {
     @Override
     public void stop() {
         LOGGER.info("Stopping connector {}", this);
-        sleep(stopTime);
+        FaultInjectionUtils.maybeInjectDelay(stopTime);
         LOGGER.info("Stopped connector {}", this);
     }
 
@@ -90,14 +89,4 @@ public class StrimziFaultInjectionSourceConnector extends SourceConnector {
         return getClass().getPackage().getImplementationVersion();
     }
 
-    static void sleep(long ms) {
-        if (ms > 0) {
-            try {
-                Thread.sleep(ms);
-            } catch (InterruptedException e) {
-                LOGGER.warn("Interrupted during sleep", e);
-                Thread.currentThread().interrupt();
-            }
-        }
-    }
 }
