@@ -19,6 +19,11 @@ and used via [strimzi-test-container](https://github.com/strimzi/test-container)
 
 * [Strimzi Fault Injection Source Connector](fault-injection-source-connector/README.md)
 
+### Adding a new connector
+
+1. Create a new Maven module and add it to `<modules>` in the root `pom.xml`.
+2. Add the module as a `<dependency>` in `distribution/pom.xml` and as a `<dependencySet>` in `distribution/src/main/assembly/distribution.xml` so it is included in release archives.
+
 ## License
 
 Strimzi Test Connectors is licensed under the [Apache License](./LICENSE), Version 2.0.
