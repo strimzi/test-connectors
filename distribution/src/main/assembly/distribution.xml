@@ -13,7 +13,7 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>io.strimzi:fault-injection-source-connector</include>
+                <include>io.strimzi.strimzi-test-connectors:fault-injection-source-connector</include>
             </includes>
             <outputDirectory>fault-injection-source-connector</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>

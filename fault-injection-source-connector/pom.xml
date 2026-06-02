@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.strimzi</groupId>
+        <groupId>io.strimzi.strimzi-test-connectors</groupId>
         <artifactId>strimzi-test-connectors</artifactId>
         <version>0.1.0</version>
     </parent>
