@@ -8,7 +8,7 @@
     <parent>
         <groupId>io.strimzi.strimzi-test-connectors</groupId>
         <artifactId>strimzi-test-connectors</artifactId>
-        <version>0.2.0-SNAPSHOT</version>
+        <version>0.3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>fault-injection-source-connector</artifactId>

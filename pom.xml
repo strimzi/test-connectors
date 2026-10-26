@@ -8,7 +8,7 @@
     <groupId>io.strimzi.strimzi-test-connectors</groupId>
     <artifactId>strimzi-test-connectors</artifactId>
     <packaging>pom</packaging>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
 
     <licenses>
         <license>
